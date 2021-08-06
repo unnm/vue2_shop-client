@@ -1,16 +1,24 @@
 # EditorConfig is awesome: https://EditorConfig.org
 
 # top-most EditorConfig file
+# 如果未指定 root = true，则 EditorConfig 将继续在项目外部查找 .editorconfig 文件
 root = true
 
+# 对所有文件执行以下规则（下面有对 Markdown 文件单独设置规则）
 [*]
+# 设置文件字符集
 charset = utf-8
+# 缩进格式
 indent_style = space
 indent_size = 2
+# 保存时将换行符转换为 if
 end_of_line = lf
+# 保存时在文件末尾插入空白行
 insert_final_newline = true
+# 保存时自动删除行尾的空白字符
 trim_trailing_whitespace = true
 
+# 对 Markdown 文件类型设置不同规则
 [*.md]
 insert_final_newline = false
 trim_trailing_whitespace = false

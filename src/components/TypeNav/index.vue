@@ -218,7 +218,13 @@
           if (this.$route.params) {
             location.params = this.$route.params
           }
-          this.$router.push(location)
+          // 如果是从home页跳转到search页，就用push
+          // 如果是从search页跳转到search页，就用replace
+          if (this.$route.path !== '/home') {
+            this.$router.replace(location)
+          } else {
+            this.$router.push(location)
+          }
         }
       },
 

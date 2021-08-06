@@ -60,6 +60,9 @@
         keyword: '',
       }
     },
+    mounted() {
+      this.$bus.$on('clearKeyword', this.clearKeyword)
+    },
     methods: {
       toSearch() {
         let location = {
@@ -72,8 +75,17 @@
         if (this.$route.query) {
           location.query = this.$route.query
         }
-
-        this.$router.push(location)
+        // 如果是从home页跳转到search页，就用push
+        // 如果是从search页跳转到search页，就用replace
+        if (this.$route.path !== '/home') {
+          this.$router.replace(location)
+        } else {
+          this.$router.push(location)
+        }
+      },
+      // 清除关键字
+      clearKeyword() {
+        this.keyword = ''
       },
     },
   }

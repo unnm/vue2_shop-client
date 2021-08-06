@@ -14,14 +14,19 @@ import '@/mock/mockServer' // 引入mockServer，让模拟的接口生效
 
 import TypeNav from '@/components/TypeNav'
 import SlideLoop from '@/components/SlideLoop'
+import Pagination from '@/components/Pagination'
 // 全局注册的组件（如果一个非路由组件被多个组件使用，那么定义在components目录中，注册在全局）
 Vue.component('TypeNav', TypeNav)
 Vue.component('SlideLoop', SlideLoop)
+Vue.component('Pagination', Pagination)
 
 Vue.config.productionTip = false
 
 new Vue({
   render: h => h(App),
   router, //所有的组件都可以使用this.$route和this.$router
-  store //所有的组件都可以拿到this.$store
+  store, //所有的组件都可以拿到this.$store
+  beforeCreate() {
+    Vue.prototype.$bus = this // 安装全局事件总线，这代表任意组件内部都可以通过this.$bus访问到vm实例（总线）
+  }
 }).$mount('#app')
