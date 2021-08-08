@@ -8,7 +8,7 @@
       上一页
     </button>
     <!-- 如果连续页码刚好是1~5，那么这里的页码1就不用显示了，否则重复了 -->
-    <!-- 只有当开始页码start不等于1或大于1时，页码1才显示 -->
+    <!-- 这个1要显示，那么start就不能是1，不能是1就一定大于1 -->
     <button v-if="startEnd.start > 1" @click="$emit('changePageNo', 1)">
       1
     </button>
@@ -54,7 +54,9 @@
       currentPageNo: Number,
       total: {
         type: Number,
-        default: 0,
+        default: 0, // 这里若没有设置默认值，则会报一个错误，说total是undefined
+        // 因为父组件中searchInfo是根据请求返回来的数据，而请求回来是需要时间的
+        // 当searchInfo没回来时，它就是个空对象，因此传递过来就是undefined
       },
       pageSize: {
         type: Number,

@@ -49,7 +49,7 @@ export const reqFloorList = () => {
   })
 }
 
-//请求获取search页面的数据
+// 请求获取search页面的数据
 // /api/list
 // post
 // 请求体参数，一个对象
@@ -64,3 +64,23 @@ export const reqSearchInfo = searchParams => {
 //其实用户发请求的时候，这个参数给空对象{}，也是可以获取到数据的，代表获取商品默认搜索的数据
 // 测试
 // reqSearchInfo({})
+
+// 请求获取详情数据
+// /api/item/{skuId}
+// get
+export const reqDetailInfo = skuId => {
+  return request({
+    url: `/item/${skuId}`,
+    method: 'get'
+  })
+}
+
+// 请求添加到购物车（或者修改购物车的商品数量）
+// /api/cart/addToCart/{skuId}/{skuNum}
+// post
+export const reqAddOrUpdateShopCart = (skuId, skuNum) => {
+  return request({
+    url: `/cart/addToCart/${skuId}/${skuNum}`,
+    method: 'post'
+  })
+}
