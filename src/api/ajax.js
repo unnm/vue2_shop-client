@@ -8,6 +8,7 @@ import axios from 'axios'
 // 引入nprogress相关的JS和CSS
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
+import store from '@/store'
 
 // 以后只要是对axios二次封装，不会在axios身上直接去封装，而是创建axios实例进行封装
 // axios.create()创建一个新的和axios具有相同功能的一个实例
@@ -26,6 +27,19 @@ instance.interceptors.request.use(
     // config其实就是请求报文，这个请求报文最后一定要返回去，因为还要继续往下走
     // 在这里我们可以添加额外的功能，也可以给请求头添加需要的数据
     NProgress.start() // 开启进度条
+
+    // 请求头内部需要添加临时标识，后期每个请求都会带上这个临时标识
+    let userTemId = store.state.user.userTemId
+    if (userTemId) {
+      config.headers.userTemId = userTemId
+    }
+
+    // 登录成功后，需要把token添加到请求头当中，今后所有的请求当中都要带上这个token
+    let token = store.state.user.token
+    if (token) {
+      config.headers.token = token
+    }
+
     return config
   }
   // 请求拦截器当中失败的回调一般不写，因为失败了，也就没有下文了

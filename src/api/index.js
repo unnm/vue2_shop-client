@@ -75,12 +75,103 @@ export const reqDetailInfo = skuId => {
   })
 }
 
-// 请求添加到购物车（或者修改购物车的商品数量）
+// 请求添加商品到购物车（或者修改购物车的商品数量）
 // /api/cart/addToCart/{skuId}/{skuNum}
 // post
 export const reqAddOrUpdateShopCart = (skuId, skuNum) => {
   return request({
     url: `/cart/addToCart/${skuId}/${skuNum}`,
     method: 'post'
+  })
+}
+
+// 请求获取购物车页面数据
+// /api/cart/cartList
+// get
+export const reqShopCartInfo = () => {
+  return request({
+    url: '/cart/cartList',
+    method: 'get'
+  })
+}
+
+// 请求修改购物车选中状态
+// /api/cart/checkCart/{skuId}/{isChecked}
+// GET
+export const reqUpdateCartIscheck = (skuId, isChecked) => {
+  return request({
+    url: `/cart/checkCart/${skuId}/${isChecked}`,
+    method: 'get'
+  })
+}
+
+// 请求删除购物车数据
+// /api/cart/deleteCart/{skuId}
+// DELETE
+export const reqDeleteShopCart = skuId => {
+  return request({
+    url: `/cart/deleteCart/${skuId}`,
+    method: 'delete'
+  })
+}
+
+// 请求注册用户
+// /api/user/passport/register
+// post
+// 参数：请求体参数，里面包括code、phone、password
+export const reqUserRegister = userInfo => {
+  return request({
+    url: '/user/passport/register',
+    method: 'post',
+    data: userInfo
+  })
+}
+
+// 请求获取用户注册验证码
+// /api/user/passport/sendCode/{phone}
+// get
+export const reqGetCode = phone => {
+  return request({
+    url: `/user/passport/sendCode/${phone}`,
+    method: 'get'
+  })
+}
+
+// 请求用户登录
+// /api/user/passport/login
+// post
+// 返回数据如下data，注意：这里返回的东西不严谨，按道理来讲，登录成功以后，只返回token，不会有其它的数据
+// 而其它的用户数据，需要重新根据token发请求获取（token校验）
+// data:{
+//   nickName: "Administrator",
+//   name: "Admin",
+//   token: "90aa16f24d04c7d882051412f9ec45b"
+// }
+export const reqUserLogin = userInfo => {
+  return request({
+    url: '/user/passport/login',
+    method: 'post',
+    data: userInfo
+  })
+}
+
+// 根据token请求获取用户的信息
+// /api/user/passport/auth/getUserInfo
+// 参数token已经在请求头当中添加了
+// get
+export const reqGetUserInfo = () => {
+  return request({
+    url: '/user/passport/auth/getUserInfo',
+    method: 'get'
+  })
+}
+
+// 请求退出登录
+// /api/user/passport/logout
+// get
+export const reqUserLogout = () => {
+  return request({
+    url: '/user/passport/logout',
+    method: 'get'
   })
 }
