@@ -80,8 +80,10 @@ router.beforeEach(async (to, from, next) => {
       targetPath.indexOf('/pay') !== -1 ||
       targetPath.startsWith('/center')
     ) {
-      // next('/login') 这样写可以直接去到登录页，但是登录成功不会去到之前想去的地方
-      next('/login?redirect=' + targetPath) //想要回到之前想去的地方，必须把想去的那个路径给带到登录里面
+      // next('/login') 这样写可以直接去到登录页，但是登录成功之后不会去到之前想去的地方
+      // 想要回到之前想去的地方，必须把想去的那个路径给带到登录页里面
+      // 注意：这里需要和登录页面配合完成
+      next('/login?redirect=' + targetPath)
     } else {
       next()
     }

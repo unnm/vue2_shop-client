@@ -4,9 +4,27 @@ import router from '@/router'
 import store from '@/store' // 默认导入简写形式
 // import {default as store} from '@/store'  // 默认导入全写形式
 
+// swiper 的CSS文件
 import 'swiper/css/swiper.css' // 引入swiper的css
 
+// mock 模拟后台接口
 import '@/mock/mockServer' // 引入mockServer，让模拟的接口生效
+// 测试ajax请求是否成功
+// import '@/api'
+// import { reqCategoryList } from '@/api'
+// reqCategoryList()
+
+// vee-validate 表单验证
+import '@/utils/validate' // 引入vee-validate相关配置
+
+// 图片懒加载
+import VueLazyload from 'vue-lazyload'
+import loading from '@/assets/images/loading.gif'
+// 在图片界面没有进入到可视范围前不加载, 在没有得到图片前先显示loading图片
+Vue.use(VueLazyload, {
+  // 内部自定义了一个指令lazy
+  loading // 指定未加载得到图片之前的loading图片
+})
 
 // Element-UI 相关
 import { Button, MessageBox, Message, Input } from 'element-ui'
@@ -66,16 +84,13 @@ import * as API from '@/api' // 一次性导入接口请求函数文件中所有
 // 无论什么暴露方式，如果想拿到暴露文件的整个那个对象，就得这么干
 // import * as xxx from './xx.js'
 
-// 测试ajax请求是否成功
-// import '@/api'
-// import { reqCategoryList } from '@/api'
-// reqCategoryList()
-
+// 全局注册的组件（如果一个非路由组件被多个组件使用，那么定义在components目录中，注册在全局）
 import TypeNav from '@/components/TypeNav'
 import SlideLoop from '@/components/SlideLoop'
 import Pagination from '@/components/Pagination'
-// 全局注册的组件（如果一个非路由组件被多个组件使用，那么定义在components目录中，注册在全局）
-Vue.component('TypeNav', TypeNav)
+// 组件的两种全局注册方式
+// Vue.component('TypeNav', TypeNav)
+Vue.component(TypeNav.name, TypeNav) // 组件如果设置了name选项，则全局注册时也可以采用这种方式，它和上面方式等效
 Vue.component('SlideLoop', SlideLoop)
 Vue.component('Pagination', Pagination)
 

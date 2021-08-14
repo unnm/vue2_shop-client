@@ -2,7 +2,7 @@
 
 import {
   reqAddOrUpdateShopCart,
-  reqshopCartInfo,
+  reqShopCartInfo,
   reqUpdateCartIscheck,
   reqDeleteShopCart
 } from '@/api'
@@ -60,7 +60,7 @@ const actions = {
   },
 
   async getshopCartInfo({ commit }) {
-    const result = await reqshopCartInfo()
+    const result = await reqShopCartInfo()
     if (result.code === 200) {
       commit('RECEIVE_SHOPCARTINFO', result.data)
     }
